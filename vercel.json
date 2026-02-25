@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/users/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/api/poojas/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/api/temples/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/api/chadhavas/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/api/payment/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/api/files/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/api/reviews/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/api-docs/(.*)",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/app.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/app.js"
+    }
+  ]
+}
