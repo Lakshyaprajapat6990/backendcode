@@ -3,9 +3,11 @@ const templeService = require('../services/templeService');
 class TempleController {
   async create(req, res) {
     try {
-       const temple = await templeService.createTemple(req.body);
+      console.log("Received Temple data:", JSON.stringify(req.body, null, 2));
+      const temple = await templeService.createTemple(req.body);
       res.status(201).json(temple);
     } catch (error) {
+      console.error("Temple creation error:", error);
       res.status(400).json({ error: error.message });
     }
   }

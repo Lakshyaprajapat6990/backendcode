@@ -4,9 +4,11 @@ const chadhavaModel = require("../models/Chadhava");
 class ChadhavaController {
   async create(req, res) {
     try {
+      console.log("Received Chadhava data:", JSON.stringify(req.body, null, 2));
       const chadhava = await chadhavaModel.create(req.body);
       res.status(201).json(chadhava);
     } catch (err) {
+      console.error("Chadhava creation error:", err);
       res.status(400).json({ error: err.message });
     }
   }
