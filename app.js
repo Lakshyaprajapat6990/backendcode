@@ -3,6 +3,7 @@ const express = require("express");
 const connectDB = require("./config/db");
 const cors = require("cors");
 const path = require("path");
+const qs = require("qs");
 const userRoutes = require("./routes/userRoutes");
 const poojaRoutes = require("./routes/poojaRoutes");
 const templeRoutes = require("./routes/templeRoutes");
@@ -15,9 +16,21 @@ const swaggerUi = require("swagger-ui-express");
 
 const app = express();
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Middleware - Updated to parse nested FormData properly using qs
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb', parameterLimit: 100000 }));
+
+// Custom middleware to parse nested objects from FormData using qs
+app.use((req, res, next) => {
+  if (req.headers['content-type'] === 'application/x-www-form-urlencoded') {
+    try {
+      req.body = qs.parse(req.body, { allowDots: true });
+    } catch (e) {
+      // Keep original body if parsing fails
+    }
+  }
+  next();
+});
 
 // CORS setup - allow all origins in production (Vercel)
 const corsOptions = {
