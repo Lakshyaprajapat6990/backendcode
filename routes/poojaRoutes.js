@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const poojaController = require("../controllers/poojaController");
 const multer = require("multer");
-// const upload = require('../middleware/upload');
+const qs = require("qs");
 const upload = multer({ dest: "/tmp" });
 
 /**

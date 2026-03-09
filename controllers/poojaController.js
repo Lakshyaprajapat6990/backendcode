@@ -4,6 +4,7 @@ const Pooja = require("../models/Pooja");
 class PoojaController {
   async create(req, res) {
     try {
+      console.log("Received Pooja data:", JSON.stringify(req.body, null, 2));
       const puja = await Pooja.create(req.body)
       res.status(201).json({
         status: true,
@@ -11,6 +12,7 @@ class PoojaController {
         data: puja,
       });
     } catch (error) {
+      console.error("Pooja creation error:", error);
       res
         .status(400)
         .json({
